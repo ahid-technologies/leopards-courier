@@ -1,5 +1,5 @@
 {
-  "name": "ahid/leopards-courier",
+  "name": "ahid-technologies/leopards-courier",
   "description": "Laravel package for integrating with Leopards Courier API",
   "type": "library",
   "license": "MIT",
