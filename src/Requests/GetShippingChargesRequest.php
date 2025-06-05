@@ -58,12 +58,6 @@ class GetShippingChargesRequest
             throw new ValidationException("A maximum of 50 CN numbers can be sent at once.");
         }
 
-        foreach ($this->data['cn_numbers'] as $cn) {
-            if (!preg_match('/^[A-Z]{2}\d{8}$/', $cn)) {
-                throw new ValidationException("Invalid CN number format: {$cn}");
-            }
-        }
-
         return true;
     }
 }

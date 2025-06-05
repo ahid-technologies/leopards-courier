@@ -3,6 +3,7 @@
 namespace Ahid\LeopardsCourier\Requests;
 
 use Ahid\LeopardsCourier\Exceptions\ValidationException;
+use Illuminate\Support\Facades\Validator;
 
 class CancelBookedPacketsRequest
 {
@@ -42,14 +43,13 @@ class CancelBookedPacketsRequest
      */
     protected function validate(): bool
     {
-        if (empty($this->cnNumbers)) {
-            throw new ValidationException('At least one CN number is required.');
-        }
+        $validator = Validator::make(
+            ['cn_numbers' => $this->cnNumbers],
+            ['cn_numbers' => 'required|array|min:1', 'cn_numbers.*' => 'required|string']
+        );
 
-        foreach ($this->cnNumbers as $cn) {
-            if (!preg_match('/^[A-Z]{2}\d{8,10}$/', $cn)) {
-                throw new ValidationException("Invalid CN format: $cn");
-            }
+        if ($validator->fails()) {
+            throw new ValidationException('Validation failed: ' . json_encode($validator->errors()));
         }
 
         return true;

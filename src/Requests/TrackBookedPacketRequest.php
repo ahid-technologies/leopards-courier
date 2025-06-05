@@ -63,7 +63,7 @@ class TrackBookedPacketRequest
     {
         $validator = Validator::make(
             ['track_numbers' => $this->trackNumbers],
-            ['track_numbers' => 'required|array|min:1', 'track_numbers.*' => 'required|string|regex:/^[A-Z0-9]{10}$/']
+            ['track_numbers' => 'required|array|min:1', 'track_numbers.*' => 'required|string']
         );
 
         if ($validator->fails()) {
